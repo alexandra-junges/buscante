@@ -1,0 +1,19 @@
+<div class="card">
+  <img
+    src="{{ book.thumbnail != undefined ? book.thumbnail : 'assets/images/cover-unavailable.png'}}"
+    alt="Book cover">
+  <div class="info-card">
+    <p class="title">{{ book.title | slice:0:30 }}</p>
+    <p class="info">Authorship:</p>
+    <p class="result">{{ book.authors | authorship | slice:0:20 }}</p>
+    <p class="info">Publication date:</p>
+    <p class="result">{{ book.publishedDate | date:'dd/MM/yyyy' }}</p>
+    <p class="info">Publishing company:</p>
+    <p class="result">{{ book.publisher | slice:0:20 }}</p>
+    <button (click)="onModalChange(true)">More details</button>
+  </div>
+</div>
+<div *ngIf="openModal">
+  <app-book-modal [book]="book" (changeModal)="onModalChange($event)"></app-book-modal>
+</div>
+
